@@ -107,6 +107,21 @@ namespace CreditCardWebAPI.Repository
             }
         }
 
+        public int GetCustomerCount(int ownerId)
+        {
+            try
+            {
+                var ownerUniqueId = _dbContext.OwnerReg.Find(ownerId);
+                var totalCustomers =_dbContext.CustReg.Count(o => o.uniqueId == ownerUniqueId.hashId);
+                return totalCustomers;
+
+            }
+            catch
+            {
+                throw new Exception("No entry!!");
+            }
+        }
+
         public List<CustRegDTO> GetCustomerDetails(int ownerId)
         {
             try
@@ -146,6 +161,22 @@ namespace CreditCardWebAPI.Repository
             {
                 throw new Exception("No records Found.");
             }
+        }
+
+        public int GetPendingCustomersCount(int ownerId)
+        {
+            try
+            {
+                var ownerUniqueId = _dbContext.OwnerReg.Find(ownerId);
+                var customerCount = _dbContext.CustReg.Count(c=> c.uniqueId == ownerUniqueId.hashId &&  c.totalCreditAmount > 0);
+                return customerCount;
+            }
+            catch
+            {
+                throw new Exception("No entry!!");
+
+            }
+            
         }
 
         public OwnerDTO GetUser(string email, string password)

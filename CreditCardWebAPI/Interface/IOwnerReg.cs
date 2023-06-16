@@ -13,8 +13,10 @@ namespace CreditCardWebAPI.Interface
         public void AddCustomerCredit(CreditDescription creditDetails, int customerId);
 
         public List<CustRegDTO> GetCustomerDetails(int ownerId);
-
+        public int GetCustomerCount(int ownerId);
         public List<CustRegDTO> GetPendingCustomers(int ownerId);
+
+        public int GetPendingCustomersCount(int ownerId);
 
         public CustomerRegistration DeleteCustomer(int customerId);
         public  OwnerDTO GetUser(string email, string password);

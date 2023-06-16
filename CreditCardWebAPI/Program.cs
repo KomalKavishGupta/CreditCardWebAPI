@@ -70,6 +70,10 @@ builder.Services.AddCors(options =>
                             .AllowAnyMethod();
     });
 });
+
+//enable Cors for single domain->  builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+//enable Cors for multiple domain->  builder.WithOrigins("http://localhost:4200", "http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+//for any domain->  builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
 var app = builder.Build();
 app.UseCors("AllowAngularOrigins");
 

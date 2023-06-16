@@ -25,14 +25,31 @@ namespace CreditCardWebAPI.Controllers
         public async Task<ActionResult<IEnumerable<CustRegDTO>>> GetCustomerDetails([FromRoute] int ownerId)
         {
             var allCustomers = await Task.FromResult(_Iowner.GetCustomerDetails(ownerId));
-            return Ok(allCustomers);
+            return allCustomers;
         }
+
+        [HttpGet]
+        [Route("totalCustomerCount/{ownerId:int}")]
+        public async Task<ActionResult<int>> GetTotalCustomerCount([FromRoute] int ownerId)
+        {
+            var totalCustomers = await Task.FromResult(_Iowner.GetCustomerCount(ownerId));
+            return totalCustomers;
+        }
+
         [HttpGet]
         [Route("pendingCustomers/{ownerId:int}")]
         public async Task<ActionResult<IEnumerable<CustRegDTO>>> GetPendingCustomers([FromRoute] int ownerId)
         {
             var pendingCustomers = await Task.FromResult(_Iowner.GetPendingCustomers(ownerId));
-            return Ok(pendingCustomers);
+            return pendingCustomers;
+        }
+
+        [HttpGet]
+        [Route("pendingCustomerCount/{ownerId:int}")]
+        public async Task<ActionResult<int>> GetPendingCustomerCount([FromRoute] int ownerId)
+        {
+            var pendingCustomers = await Task.FromResult(_Iowner.GetPendingCustomersCount(ownerId));
+            return pendingCustomers;
         }
 
         [HttpPost]
